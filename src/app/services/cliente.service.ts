@@ -35,4 +35,8 @@ export class ClienteService {
   updateCliente(cliente: Cliente): Observable<Cliente> {
     return this.http.put(`${this.API_URI}/upd`, cliente);
   }
+
+  getClienteById(id : Int16Array){
+    return this.http.get(`${this.API_URI}/${id}`)
+  }
 }

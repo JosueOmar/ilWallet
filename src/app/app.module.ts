@@ -24,6 +24,12 @@ import { RegistrarTarjetaComponent } from './componentes/tarjetas/registrar-tarj
 import { RegistrarTransferenciaComponent } from './componentes/transferencias/registrar-transferencia/registrar-transferencia.component';
 
 import './watson';
+import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
+
+import { PushNotificationsModule } from 'ng-push-ivy';
+
+import { NgxNotificationMsgModule } from 'ngx-notification-msg'
+
 
 @NgModule({
   declarations: [
@@ -48,9 +54,21 @@ import './watson';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule, ChartsModule
+    RouterModule,
+    ChartsModule,
+    PushNotificationsModule,
+    NgxNotificationMsgModule 
   ],
-  providers: [ClienteService],
+  providers: [
+    ClienteService,
+    {
+      provide: InjectableRxStompConfig,
+   },
+   {
+      provide: RxStompService,
+      deps: [InjectableRxStompConfig]
+   }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
